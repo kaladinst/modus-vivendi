@@ -1,26 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/ODEVLIB.csproj": {}
+    "C:\\Users\\emird\\OneDrive\\Masaüstü\\ODEVLIB\\ODEVLIB\\ODEVLIB.csproj": {}
   },
   "projects": {
-    "/Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/ODEVLIB.csproj": {
+    "C:\\Users\\emird\\OneDrive\\Masaüstü\\ODEVLIB\\ODEVLIB\\ODEVLIB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/ODEVLIB.csproj",
+        "projectUniqueName": "C:\\Users\\emird\\OneDrive\\Masaüstü\\ODEVLIB\\ODEVLIB\\ODEVLIB.csproj",
         "projectName": "ODEVLIB",
-        "projectPath": "/Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/ODEVLIB.csproj",
-        "packagesPath": "/Users/emirduman/.nuget/packages/",
-        "outputPath": "/Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/obj/",
+        "projectPath": "C:\\Users\\emird\\OneDrive\\Masaüstü\\ODEVLIB\\ODEVLIB\\ODEVLIB.csproj",
+        "packagesPath": "C:\\Users\\emird\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\emird\\OneDrive\\Masaüstü\\ODEVLIB\\ODEVLIB\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/emirduman/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\emird\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -33,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -54,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

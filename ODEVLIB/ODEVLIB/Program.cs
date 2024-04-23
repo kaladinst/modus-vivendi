@@ -20,7 +20,7 @@ using System.IO;
 
 namespace ODEVLIB
 {
-    public static class Collisions
+    public  class Collisions
     {
        // Classes of the shapes
         public class Point
@@ -263,11 +263,26 @@ namespace ODEVLIB
             }
             return false;
         }
+        public static bool QuadCircleCol(Quadrilateral q, Circle c)
+        {
+            if (Math.Sqrt(Math.Pow(c.X - Math.Max(q.X, Math.Min(c.X, q.X + q.Width)), 2) + Math.Pow(c.Y - Math.Max(q.Y, Math.Min(c.Y, q.Y + q.Height)), 2)) < c.Radius)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool QuadQuadCol(Quadrilateral q1, Quadrilateral q2)
+        {
+            if (q1.X < q2.X + q2.Width && q1.X + q1.Width > q2.X && q1.Y < q2.Y + q2.Height && q1.Y + q1.Height > q2.Y)
+            {
+                return true;
+            }
+            return false;
+        }
         public static List<Point> GetPoints()
         {
             return points;
         }
-        // Collision method for point and circle
         public static bool PointCircleCol(Point p, Circle c)
         {
             if (Math.Sqrt(Math.Pow(p.X - c.X, 2) + Math.Pow(p.Y - c.Y, 2)) < c.Radius)

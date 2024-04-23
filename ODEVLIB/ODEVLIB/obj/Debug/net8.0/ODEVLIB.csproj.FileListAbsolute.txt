@@ -12,3 +12,17 @@
 /Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/obj/Debug/net8.0/ODEVLIB.pdb
 /Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/obj/Debug/net8.0/ODEVLIB.genruntimeconfig.cache
 /Users/emirduman/RiderProjects/ODEVLIB/ODEVLIB/obj/Debug/net8.0/ref/ODEVLIB.dll
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\bin\Debug\net8.0\ODEVLIB.exe
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\bin\Debug\net8.0\ODEVLIB.deps.json
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\bin\Debug\net8.0\ODEVLIB.runtimeconfig.json
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\bin\Debug\net8.0\ODEVLIB.dll
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\bin\Debug\net8.0\ODEVLIB.pdb
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.AssemblyInfoInputs.cache
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.AssemblyInfo.cs
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.csproj.CoreCompileInputs.cache
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.dll
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\refint\ODEVLIB.dll
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.pdb
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ODEVLIB.genruntimeconfig.cache
+C:\Users\emird\OneDrive\Masaüstü\ODEVLIB\ODEVLIB\obj\Debug\net8.0\ref\ODEVLIB.dll
