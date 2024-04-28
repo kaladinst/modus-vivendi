@@ -24,10 +24,14 @@ namespace CollisionControl
 {
     public partial class ShapeDialog : Form
     {
+        public string GetSelectedShape()
+        {
+            return shapeComboBox.SelectedItem.ToString();
+        }
         public object SelectedShape { get; private set; }
         private List<TextBox> propertyTextBoxes = new List<TextBox>();
         private List<Label> propertyLabels = new List<Label>();
-        private Dictionary<string, List<string>> shapeCollisions = new Dictionary<string, List<string>>
+        public static   Dictionary<string, List<string>>  shapeCollisions = new Dictionary<string, List<string>>
 {
     { "Point", new List<string> { "Quadrilateral", "Circle", "Cylinder", "Sphere", "RectangularPrism" } },
     { "Quadrilateral", new List<string> { "Circle", "Quadrilateral" , "Point" } },
@@ -37,18 +41,30 @@ namespace CollisionControl
     { "Sphere", new List<string> { "Point", "Cylinder", "Surface", "Sphere", "RectangularPrism" } },
     { "RectangularPrism", new List<string> { "Point", "Surface", "Sphere", "RectangularPrism" } }
 };
-        public ShapeDialog()
+        public ShapeDialog(string title , List<string> shapes = null)
         {
             InitializeComponent();
+            this.Text = title;
+            this.Text = "Select Shape";
+            this.label4.Text = title;
             shapeComboBox.Items.Clear();
-            shapeComboBox.Items.Add("Point");
-            shapeComboBox.Items.Add("Quadrilateral");
-            shapeComboBox.Items.Add("Cylinder");
-            shapeComboBox.Items.Add("Rectangle");
-            shapeComboBox.Items.Add("Circle");
-            shapeComboBox.Items.Add("RectangularPrism");
-            shapeComboBox.Items.Add("Surface");
-            shapeComboBox.Items.Add("Sphere");
+            if (shapes == null)
+            {
+                shapeComboBox.Items.Add("Point");
+                shapeComboBox.Items.Add("Quadrilateral");
+                shapeComboBox.Items.Add("Cylinder");
+                shapeComboBox.Items.Add("Circle");
+                shapeComboBox.Items.Add("RectangularPrism");
+                shapeComboBox.Items.Add("Surface");
+                shapeComboBox.Items.Add("Sphere");
+            }
+            else
+            {
+                foreach (string shape in shapes)
+                {
+                    shapeComboBox.Items.Add(shape);
+                }
+            }
             shapeComboBox.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             shapeComboBox.SelectedIndex = 0;
         }
@@ -57,7 +73,6 @@ namespace CollisionControl
         {
 
         }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -75,20 +90,34 @@ namespace CollisionControl
 
 
         }
+        // Create textboxes for shape properties
         private void CreatePropertyTextBoxes()
         {
             List<string> properties;
             switch (shapeComboBox.SelectedItem.ToString())
             {
                 case "Point":
-                    properties = new List<string> { "X", "Y" };
+                    properties = new List<string> { "X", "Y", "Z" }; // Add "Z"
                     break;
                 case "Quadrilateral":
-                    properties = new List<string> { "X", "Y", "Width", "Height" };
+                    properties = new List<string> { "X", "Y", "Width", "Height"  };
                     break;
                 case "Cylinder":
-                    properties = new List<string> { "Center X", "Center Y", "Radius", "Height" };
+                    properties = new List<string> { "Center X", "Center Y", "Radius" , "Height" };
                     break;
+                case "Circle":
+                    properties = new List<string> { "Center X", "Center Y", "Radius" };
+                    break;
+                case "RectangularPrism":
+                    properties = new List<string> { "Center X", "Center Y", "Center Z", "Width", "Height", "Depth" };
+                    break;
+                case "Surface":
+                    properties = new List<string> { "Center X", "Center Y", "Center Z", "Width", "Height" };
+                    break;
+                case "Sphere":
+                    properties = new List<string> { "Center X", "Center Y", "Center Z", "Radius" };
+                    break;
+
                 default:
                     throw new Exception("Invalid shape type");
             }
@@ -112,7 +141,7 @@ namespace CollisionControl
                 propertyTextBoxes.Add(textBox);
 
                 column++;
-                if (column > 4)
+                if (column > 5)
                 {
                     column = 0;
                     row++;
@@ -120,6 +149,7 @@ namespace CollisionControl
             }
         }
 
+        // OK button event handler
         private void okBt_Click(object sender, EventArgs e)
         {
             try
@@ -127,9 +157,11 @@ namespace CollisionControl
                 switch (shapeComboBox.SelectedItem.ToString())
                 {
                     case "Point":
-                        if (int.TryParse(propertyTextBoxes[0].Text, out int x) && int.TryParse(propertyTextBoxes[1].Text, out int y))
+                        if (int.TryParse(propertyTextBoxes[0].Text, out int pointX) &&
+                            int.TryParse(propertyTextBoxes[1].Text, out int pointY) &&
+                            int.TryParse(propertyTextBoxes[2].Text, out int pointZ)) // Add this line
                         {
-                            SelectedShape = new ODEVLIB.Collisions.Point { X = x, Y = y };
+                            SelectedShape = new ODEVLIB.Collisions.Point { X = pointX, Y = pointY, Z = pointZ }; // Modify this line
                         }
                         else
                         {
@@ -138,9 +170,9 @@ namespace CollisionControl
                         break;
                     case "Quadrilateral":
                         if (int.TryParse(propertyTextBoxes[0].Text, out int quadX) && int.TryParse(propertyTextBoxes[1].Text, out int quadY) &&
-                            int.TryParse(propertyTextBoxes[2].Text, out int width) && int.TryParse(propertyTextBoxes[3].Text, out int height))
+                            int.TryParse(propertyTextBoxes[2].Text, out int quadWidth) && int.TryParse(propertyTextBoxes[3].Text, out int quadHeight))
                         {
-                            SelectedShape = new ODEVLIB.Collisions.Quadrilateral { X = quadX, Y = quadY, Width = width, Height = height };
+                            SelectedShape = new ODEVLIB.Collisions.Quadrilateral { X = quadX, Y = quadY, Width = quadWidth, Height = quadHeight };
                         }
                         else
                         {
@@ -149,16 +181,63 @@ namespace CollisionControl
                         break;
                     case "Cylinder":
                         if (int.TryParse(propertyTextBoxes[0].Text, out int cylX) && int.TryParse(propertyTextBoxes[1].Text, out int cylY) &&
-                            int.TryParse(propertyTextBoxes[2].Text, out int cylZ) && int.TryParse(propertyTextBoxes[3].Text, out int radius) &&
-                            int.TryParse(propertyTextBoxes[4].Text, out int cylHeight))
+                            int.TryParse(propertyTextBoxes[2].Text, out int cylRadius) && int.TryParse(propertyTextBoxes[3].Text, out int cylHeight)) // Add this line
                         {
-                            SelectedShape = new ODEVLIB.Collisions.Cylinder { X = cylX, Y = cylY, Z = cylZ, Radius = radius, Height = cylHeight };
+                            SelectedShape = new ODEVLIB.Collisions.Cylinder { X = cylX, Y = cylY, Radius = cylRadius, Height = cylHeight }; // Modify this line
                         }
                         else
                         {
                             throw new Exception("Invalid input for Cylinder properties");
                         }
                         break;
+
+                    case "Circle":
+                        if (int.TryParse(propertyTextBoxes[0].Text, out int circleX) && int.TryParse(propertyTextBoxes[1].Text, out int circleY) &&
+                            int.TryParse(propertyTextBoxes[2].Text, out int circleRadius))
+                        {
+                            SelectedShape = new ODEVLIB.Collisions.Circle { X = circleX, Y = circleY, Radius = circleRadius };
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid input for Circle properties");
+                        }
+                        break;
+                    case "RectangularPrism":
+                        if (int.TryParse(propertyTextBoxes[0].Text, out int rectPrismX) && int.TryParse(propertyTextBoxes[1].Text, out int rectPrismY) &&
+                            int.TryParse(propertyTextBoxes[2].Text, out int rectPrismZ) && int.TryParse(propertyTextBoxes[3].Text, out int rectPrismWidth) &&
+                            int.TryParse(propertyTextBoxes[4].Text, out int rectPrismHeight) && int.TryParse(propertyTextBoxes[5].Text, out int rectPrismDepth))
+                        {
+                            SelectedShape = new ODEVLIB.Collisions.RectangularPrism { X = rectPrismX, Y = rectPrismY, Z = rectPrismZ, Width = rectPrismWidth, Height = rectPrismHeight, Depth = rectPrismDepth };
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid input for RectangularPrism properties");
+                        }
+                        break;
+                    case "Surface":
+                        if (int.TryParse(propertyTextBoxes[0].Text, out int surfaceX) && int.TryParse(propertyTextBoxes[1].Text, out int surfaceY) &&
+                            int.TryParse(propertyTextBoxes[2].Text, out int surfaceZ) && int.TryParse(propertyTextBoxes[3].Text, out int surfaceWidth) &&
+                            int.TryParse(propertyTextBoxes[4].Text, out int surfaceHeight))
+                        {
+                            SelectedShape = new ODEVLIB.Collisions.Surface { X = surfaceX, Y = surfaceY, Z = surfaceZ, Width = surfaceWidth, Height = surfaceHeight };
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid input for Surface properties");
+                        }
+                        break;
+                    case "Sphere":
+                        if (int.TryParse(propertyTextBoxes[0].Text, out int sphereX) && int.TryParse(propertyTextBoxes[1].Text, out int sphereY) &&
+                            int.TryParse(propertyTextBoxes[2].Text, out int sphereZ) && int.TryParse(propertyTextBoxes[3].Text, out int sphereRadius))
+                        {
+                            SelectedShape = new ODEVLIB.Collisions.Sphere { X = sphereX, Y = sphereY, Z = sphereZ, Radius = sphereRadius };
+                        }
+                        else
+                        {
+                            throw new Exception("Invalid input for Sphere properties");
+                        }
+                        break;
+
                     default:
                         throw new Exception("Invalid shape type");
                 }
